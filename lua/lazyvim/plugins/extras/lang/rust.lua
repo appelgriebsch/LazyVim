@@ -48,12 +48,26 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^3", -- Recommended
     ft = { "rust" },
-    keys = {
-      { "<leader>cR", function() vim.cmd.RustLsp("codeAction") end, desc = "Code Action" },
-      { "<leader>dr", function() vim.cmd.RustLsp("debuggables") end, desc = "Rust debuggables" },
-    },
     opts = {
       server = {
+        on_attach = function(_, bufnr)
+          -- register which-key mappings
+          local wk = require("which-key")
+          wk.register({
+            ["<leader>cR"] = {
+              function()
+                vim.cmd.RustLsp("codeAction")
+              end,
+              "Code Action",
+            },
+            ["<leader>dr"] = {
+              function()
+                vim.cmd.RustLsp("debuggables")
+              end,
+              "Rust debuggables",
+            },
+          }, { mode = "n", buffer = bufnr })
+        end,
         settings = {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
@@ -78,13 +92,11 @@ return {
             },
           },
         },
-      }
+      },
     },
     config = function(_, opts)
-      vim.g.rustaceanvim = vim.tbl_deep_extend("force",
-        {},
-        opts or {})
-    end
+      vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
+    end,
   },
 
   -- Correctly setup lspconfig for Rust 🚀
@@ -129,5 +141,4 @@ return {
       },
     },
   },
-
 }
