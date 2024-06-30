@@ -1,9 +1,6 @@
 ---@class lazyvim.util.ui
 local M = {}
 
----@type (fun(buf:number, lnum:number, vnum:number, win:number):Sign[]?)[]
-M.virtual = {}
-
 ---@alias Sign {name:string, text:string, texthl:string, priority:number}
 
 -- Returns a list of regular and extmark signs sorted by priority (low to high)
@@ -81,7 +78,7 @@ function M.foldtext()
   if not ret or type(ret) == "string" then
     ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
   end
-  table.insert(ret, { " " .. require("lazyvim.config").icons.misc.dots })
+  table.insert(ret, { " " .. LazyVim.config.icons.misc.dots })
 
   if not vim.treesitter.foldtext then
     return table.concat(
@@ -108,21 +105,9 @@ function M.statuscolumn()
   if show_signs then
     local signs = M.get_signs(buf, vim.v.lnum)
 
-    local has_virtual = false
-    for _, fn in ipairs(M.virtual) do
-      local virtual = fn(buf, vim.v.lnum, vim.v.virtnum, win)
-      if virtual then
-        has_virtual = true
-        vim.list_extend(signs, virtual)
-      end
-    end
-
     ---@type Sign?,Sign?,Sign?
     local left, right, fold, githl
     for _, s in ipairs(signs) do
-      if s.name and s.name:lower():find("^octo_clean") then
-        s.texthl = "IblScope"
-      end
       if s.name and (s.name:find("GitSign") or s.name:find("MiniDiffSign")) then
         right = s
         if use_githl then
@@ -132,9 +117,6 @@ function M.statuscolumn()
         left = s
       end
     end
-    if vim.v.virtnum ~= 0 and not has_virtual then
-      left = nil
-    end
 
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
@@ -142,7 +124,7 @@ function M.statuscolumn()
       elseif
         show_open_folds
         and not LazyVim.ui.skip_foldexpr[buf]
-        and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
+        and tostring(vim.treesitter.foldexpr(vim.v.lnum)):sub(1, 1) == ">"
       then -- fold start
         fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
@@ -158,10 +140,14 @@ function M.statuscolumn()
   local is_num = vim.wo[win].number
   local is_relnum = vim.wo[win].relativenumber
   if (is_num or is_relnum) and vim.v.virtnum == 0 then
-    if vim.v.relnum == 0 then
-      components[2] = is_num and "%l" or "%r" -- the current line
+    if vim.fn.has("nvim-0.11") == 1 then
+      components[2] = "%l" -- 0.11 handles both the current and other lines with %l
     else
-      components[2] = is_relnum and "%r" or "%l" -- other lines
+      if vim.v.relnum == 0 then
+        components[2] = is_num and "%l" or "%r" -- the current line
+      else
+        components[2] = is_relnum and "%r" or "%l" -- other lines
+      end
     end
     components[2] = "%=" .. components[2] .. " " -- right align
   end
@@ -245,7 +231,7 @@ function M.bufremove(buf)
 
   if vim.bo.modified then
     local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-    if choice == 0 then -- Cancel
+    if choice == 0 or choice == 3 then -- 0 for <Esc>/<C-c> and 3 for Cancel
       return
     end
     if choice == 1 then -- Yes

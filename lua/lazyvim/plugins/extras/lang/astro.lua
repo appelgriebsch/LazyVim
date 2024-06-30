@@ -3,9 +3,11 @@ return {
     return LazyVim.extras.wants({
       ft = "astro",
       root = {
+        -- https://docs.astro.build/en/guides/configuring-astro/#supported-config-file-types
         "astro.config.js",
         "astro.config.mjs",
         "astro.config.cjs",
+        "astro.config.ts",
       },
     })
   end,
@@ -39,6 +41,16 @@ return {
           enableForWorkspaceTypeScriptVersions = true,
         },
       })
+    end,
+  },
+
+  {
+    "conform.nvim",
+    opts = function(_, opts)
+      if LazyVim.has_extra("formatting.prettier") then
+        opts.formatters_by_ft = opts.formatters_by_ft or {}
+        opts.formatters_by_ft.astro = { "prettier" }
+      end
     end,
   },
 }

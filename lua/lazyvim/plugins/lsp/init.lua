@@ -5,7 +5,7 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
     ---@class PluginLspOpts
     opts = function()
@@ -38,7 +38,7 @@ return {
         -- provide the inlay hints.
         inlay_hints = {
           enabled = true,
-          exclude = {}, -- filetypes for which you don't want to enable inlay hints
+          exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
         },
         -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
         -- Be aware that you also will need to properly configure your LSP server to
@@ -170,7 +170,7 @@ return {
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
           or function(diagnostic)
-            local icons = require("lazyvim.config").icons.diagnostics
+            local icons = LazyVim.config.icons.diagnostics
             for d, icon in pairs(icons) do
               if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                 return icon

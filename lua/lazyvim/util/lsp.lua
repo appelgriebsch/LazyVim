@@ -22,12 +22,13 @@ function M.get_clients(opts)
 end
 
 ---@param on_attach fun(client:vim.lsp.Client, buffer)
-function M.on_attach(on_attach)
+---@param name? string
+function M.on_attach(on_attach, name)
   return vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local buffer = args.buf ---@type number
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client then
+      if client and (not name or client.name == name) then
         return on_attach(client, buffer)
       end
     end,
@@ -128,6 +129,7 @@ function M.rename_file()
   vim.ui.input({
     prompt = "New File Name: ",
     default = extra,
+    completion = "file",
   }, function(new)
     if not new or new == "" or new == extra then
       return
@@ -278,10 +280,11 @@ function M.words.setup(opts)
         if not require("lazyvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
           return false
         end
+
         if not ({ M.words.get() })[2] then
           if ev.event:find("CursorMoved") then
             vim.lsp.buf.clear_references()
-          else
+          elseif not LazyVim.cmp.visible() then
             vim.lsp.buf.document_highlight()
           end
         end
@@ -340,6 +343,7 @@ M.action = setmetatable({}, {
 
 ---@class LspCommand: lsp.ExecuteCommandParams
 ---@field open? boolean
+---@field handler? lsp.Handler
 
 ---@param opts LspCommand
 function M.execute(opts)
@@ -353,7 +357,7 @@ function M.execute(opts)
       params = params,
     })
   else
-    return vim.lsp.buf_request(0, "workspace/executeCommand", params)
+    return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
   end
 end
 

@@ -65,11 +65,7 @@ return {
               },
             },
             -- Add clippy lints for Rust.
-            checkOnSave = {
-              allFeatures = true,
-              command = "clippy",
-              extraArgs = { "--no-deps" },
-            },
+            checkOnSave = true,
             procMacro = {
               enable = true,
               ignored = {
@@ -120,11 +116,10 @@ return {
   {
     "nvim-neotest/neotest",
     optional = true,
-    opts = function(_, opts)
-      opts.adapters = opts.adapters or {}
-      vim.list_extend(opts.adapters, {
-        require("rustaceanvim.neotest"),
-      })
-    end,
+    opts = {
+      adapters = {
+        ["rustaceanvim.neotest"] = {},
+      },
+    },
   },
 }

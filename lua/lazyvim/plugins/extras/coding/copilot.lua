@@ -27,7 +27,7 @@ return {
       }
       table.insert(opts.sections.lualine_x, 2, {
         function()
-          local icon = require("lazyvim.config").icons.kinds.Copilot
+          local icon = LazyVim.config.icons.kinds.Copilot
           local status = require("copilot.api").status.data
           return icon .. (status.message or "")
         end,
@@ -66,10 +66,8 @@ return {
           -- attach cmp source whenever copilot attaches
           -- fixes lazy-loading issues with the copilot cmp source
           LazyVim.lsp.on_attach(function(client)
-            if client.name == "copilot" then
-              copilot_cmp._on_insert_enter({})
-            end
-          end)
+            copilot_cmp._on_insert_enter({})
+          end, "copilot")
         end,
       },
     },

@@ -18,7 +18,7 @@ return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("lazyvim.config").icons.kinds,
+        icons = LazyVim.config.icons.kinds,
         lazy_update_context = true,
       }
     end,
@@ -29,14 +29,16 @@ return {
     "nvim-lualine/lualine.nvim",
     optional = true,
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_c, {
-        function()
-          return require("nvim-navic").get_location()
-        end,
-        cond = function()
-          return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-        end,
-      })
+      if not vim.g.trouble_lualine then
+        table.insert(opts.sections.lualine_c, {
+          function()
+            return require("nvim-navic").get_location()
+          end,
+          cond = function()
+            return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+          end,
+        })
+      end
     end,
   },
 }
