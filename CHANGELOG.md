@@ -1,5 +1,52 @@
 # Changelog
 
+## [12.38.2](https://github.com/LazyVim/LazyVim/compare/v12.38.1...v12.38.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **news:** pcall diag when showing news for older Neovim versions ([94bf4f9](https://github.com/LazyVim/LazyVim/commit/94bf4f932482012306fb375c4418a398bb00a949))
+
+## [12.38.1](https://github.com/LazyVim/LazyVim/compare/v12.38.0...v12.38.1) (2024-07-24)
+
+
+### Bug Fixes
+
+* **autcmds:** added grug-far to close with q ([3282721](https://github.com/LazyVim/LazyVim/commit/328272144c8c0b2d96988770d48c690a72613a81))
+
+## [12.38.0](https://github.com/LazyVim/LazyVim/compare/v12.37.0...v12.38.0) (2024-07-24)
+
+
+### Features
+
+* **markdown:** markdown-render toggle ([c8d0faf](https://github.com/LazyVim/LazyVim/commit/c8d0faf9b152283b2ae74f9594287a834eae002a))
+* **markdown:** replace `headlines.nvim` by `markdown.nvim` ([#4139](https://github.com/LazyVim/LazyVim/issues/4139)) ([264abdf](https://github.com/LazyVim/LazyVim/commit/264abdf9d52fe44c1dcb66f0502dcba5a881ea43))
+
+## [12.37.0](https://github.com/LazyVim/LazyVim/compare/v12.36.0...v12.37.0) (2024-07-24)
+
+
+### Features
+
+* **catppuccin:** enable grug-far integration ([#4156](https://github.com/LazyVim/LazyVim/issues/4156)) ([4bf6d85](https://github.com/LazyVim/LazyVim/commit/4bf6d856a805d38c19c8485c7a062d6cbc5cfaa8))
+* **elixir:** add elixirls code actions ([#4148](https://github.com/LazyVim/LazyVim/issues/4148)) ([f94a059](https://github.com/LazyVim/LazyVim/commit/f94a0591b3e5838794b1c3897ec21491aeb080fe))
+
+
+### Bug Fixes
+
+* **dap:** don't mess up DAP adapters provided by nvim-dap-python ([#4141](https://github.com/LazyVim/LazyVim/issues/4141)) ([940d7df](https://github.com/LazyVim/LazyVim/commit/940d7df59aac01f6cc587f035d9b4913139fae60))
+* **dap:** extend dap.configurations from .vscode/launch.json ([#4106](https://github.com/LazyVim/LazyVim/issues/4106)) ([caf227d](https://github.com/LazyVim/LazyVim/commit/caf227dd08e83c826800cb88c34c87c600793fa3))
+* **grug-far:** use new transient option ([1c2be20](https://github.com/LazyVim/LazyVim/commit/1c2be200c185a4567c6a634da2b624d9a638fe73))
+* **keymaps:** leader-wd ([f0d8b8b](https://github.com/LazyVim/LazyVim/commit/f0d8b8b293c1fc798b576a74a87f9bd0b59714f3))
+* **keymaps:** leader-wm ([391f506](https://github.com/LazyVim/LazyVim/commit/391f506295607e12db545b85fcbe0e00b1b8efa9))
+* **news:** deprecated API ([f6cd4a3](https://github.com/LazyVim/LazyVim/commit/f6cd4a38c667e3ef56672d723705ecd8a774a0f4))
+
+## [12.36.0](https://github.com/LazyVim/LazyVim/compare/v12.35.1...v12.36.0) (2024-07-22)
+
+
+### Features
+
+* **grug-far:** no longer needed to call visual replace separately ([72d0cad](https://github.com/LazyVim/LazyVim/commit/72d0cad3530d877401ad9674f5266c79fbec396b))
+
 ## [12.35.1](https://github.com/LazyVim/LazyVim/compare/v12.35.0...v12.35.1) (2024-07-21)
 
 
