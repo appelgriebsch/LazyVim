@@ -1,5 +1,67 @@
 # Changelog
 
+## [12.42.0](https://github.com/LazyVim/LazyVim/compare/v12.41.0...v12.42.0) (2024-10-04)
+
+
+### Features
+
+* **root:** provide `vim.g.root_lsp_ignore` to ignore LSP servers ([#4332](https://github.com/LazyVim/LazyVim/issues/4332)) ([90a9231](https://github.com/LazyVim/LazyVim/commit/90a92312aed79d4ee9d231f9eb3f8cd4debc46d1))
+
+
+### Bug Fixes
+
+* **gitsigns:** change name of filetype blame ([#4243](https://github.com/LazyVim/LazyVim/issues/4243)) ([3e257fd](https://github.com/LazyVim/LazyVim/commit/3e257fdb8874d7112446dc3ca1caf9c3263d8194))
+* **neotest:** properly initialize adapter with call table. Fixes [#4538](https://github.com/LazyVim/LazyVim/issues/4538) ([327e829](https://github.com/LazyVim/LazyVim/commit/327e829c156864975785914038fe4515dadcba87))
+
+## [12.41.0](https://github.com/LazyVim/LazyVim/compare/v12.40.0...v12.41.0) (2024-10-02)
+
+
+### Features
+
+* **rust:** update rustaceanvim ([#4477](https://github.com/LazyVim/LazyVim/issues/4477)) ([04515b1](https://github.com/LazyVim/LazyVim/commit/04515b139973173e90604f700d70f4e6d714da1f))
+* **toggle:** add more `M.wk` fields for better user customization ([#4521](https://github.com/LazyVim/LazyVim/issues/4521)) ([57c0c0b](https://github.com/LazyVim/LazyVim/commit/57c0c0bc9f86467d90c0c10aac680bdba8e56469))
+
+
+### Bug Fixes
+
+* **extras:** migrate away from deprecated `get_target_window()` in mini-files ([#4479](https://github.com/LazyVim/LazyVim/issues/4479)) ([b110550](https://github.com/LazyVim/LazyVim/commit/b110550393957a3434db1f4f0dc5804a9d31820f))
+
+## [12.40.0](https://github.com/LazyVim/LazyVim/compare/v12.39.0...v12.40.0) (2024-10-02)
+
+
+### Features
+
+* **lang:** add ts_ls to lsp config ([#4406](https://github.com/LazyVim/LazyVim/issues/4406)) ([34f0e56](https://github.com/LazyVim/LazyVim/commit/34f0e568d4e853cc2b4f0d628749cb66cd1b9aaf))
+
+
+### Bug Fixes
+
+* **extras:** rename `lspconfig.server_configurations` to `lspconfig.configs` ([#4518](https://github.com/LazyVim/LazyVim/issues/4518)) ([7432574](https://github.com/LazyVim/LazyVim/commit/74325743e7ff9d9efe9172ba96ec063c65ee219c))
+* **lsp:** backward compat with lspconfig refactor. Fixes [#4525](https://github.com/LazyVim/LazyVim/issues/4525). See [#4518](https://github.com/LazyVim/LazyVim/issues/4518) ([6e40252](https://github.com/LazyVim/LazyVim/commit/6e4025229d4628a7278cf7c09f942af6dfea05dd))
+* **render-markdown:** remove redundant `opts.file_types` ([#4506](https://github.com/LazyVim/LazyVim/issues/4506)) ([9b17672](https://github.com/LazyVim/LazyVim/commit/9b1767205cffd958ee9c74ceca299bd6c128b5f8))
+
+## [12.39.0](https://github.com/LazyVim/LazyVim/compare/v12.38.2...v12.39.0) (2024-09-18)
+
+
+### Features
+
+* **cmp:** better c-n and c-p mapping fallback. Fixes [#4414](https://github.com/LazyVim/LazyVim/issues/4414) ([86d4f14](https://github.com/LazyVim/LazyVim/commit/86d4f14bc89b2174cadde93a4f49fc83a01df642))
+* **lazygit:** allow user to override LazyVim config with custom file ([#4367](https://github.com/LazyVim/LazyVim/issues/4367)) ([41a8f3a](https://github.com/LazyVim/LazyVim/commit/41a8f3a5fb2bb84036f33764d77049cafb0adedf))
+* **persistence:** added leader-qS to select a session ([5a0122b](https://github.com/LazyVim/LazyVim/commit/5a0122b61977b5b2c392b64eb615025f49f2aef7))
+* **vscode:** make use of vscode builtin terminal ([#4392](https://github.com/LazyVim/LazyVim/issues/4392)) ([ead5955](https://github.com/LazyVim/LazyVim/commit/ead5955befe8d6e1e06877ea923c78375dcfad1e))
+
+
+### Bug Fixes
+
+* **extra:** make copilot-chat.lua fallback to the latest model ([#4411](https://github.com/LazyVim/LazyVim/issues/4411)) ([ae17b32](https://github.com/LazyVim/LazyVim/commit/ae17b321c7fc95e8c678865368ebfcac7c2e7483))
+* **grug:** grug_far -&gt; grug.open ([#4404](https://github.com/LazyVim/LazyVim/issues/4404)) ([746ea8f](https://github.com/LazyVim/LazyVim/commit/746ea8f1e6afdad89d0fab4ad04f370cf3998f67))
+* **markdown-preview:** unknown function `mkdp#util#install` ([#4196](https://github.com/LazyVim/LazyVim/issues/4196)) ([b892861](https://github.com/LazyVim/LazyVim/commit/b892861bdee888f83401e745bda1798dc01e2c54))
+* **ocaml:** get_language_id ([#4327](https://github.com/LazyVim/LazyVim/issues/4327)) ([6dcd979](https://github.com/LazyVim/LazyVim/commit/6dcd9794b1819965eb4f3dca70a1eb3c463de3cf))
+* **omnisharp:** use Go To Definition with fzf.lua ([#4260](https://github.com/LazyVim/LazyVim/issues/4260)) ([39ca76c](https://github.com/LazyVim/LazyVim/commit/39ca76c9607a7d92aff5b97c50b7ccbf1b2d46b6))
+* **toggle:** diagnostics enable/disable. See [#4205](https://github.com/LazyVim/LazyVim/issues/4205) ([3dbace9](https://github.com/LazyVim/LazyVim/commit/3dbace941ee935c89c73fd774267043d12f57fe2))
+* **toggle:** make `diagnostics` compatible with nvim-0.9.5 ([#4205](https://github.com/LazyVim/LazyVim/issues/4205)) ([c012f85](https://github.com/LazyVim/LazyVim/commit/c012f859597c4ba3e54dd26372351098a25379cd))
+* **vue:** ensure css treesitter installed ([#4308](https://github.com/LazyVim/LazyVim/issues/4308)) ([627215a](https://github.com/LazyVim/LazyVim/commit/627215a72b7744973a778722724d07eccefa0c79))
+
 ## [12.38.2](https://github.com/LazyVim/LazyVim/compare/v12.38.1...v12.38.2) (2024-07-25)
 
 
